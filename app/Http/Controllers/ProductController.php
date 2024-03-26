@@ -24,11 +24,7 @@ class ProductController extends Controller
     {
         $product = new Product;
 
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-
-        $product->save();
+        $product->create($request->all());
 
         return response($product, 201);
     }
@@ -59,11 +55,7 @@ class ProductController extends Controller
         {
             $product = Product::find($id);
 
-            $product->name = is_null($request->name) ? $product->name : $request->name;
-            $product->description = is_null($request->description) ? $product->description : $request->description;
-            $product->price = is_null($request->price) ? $product->price : $request->price;
-
-            $product->save();
+            $product->update($request->all());
 
             return response($product, 200);
         }
